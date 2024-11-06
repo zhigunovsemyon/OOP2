@@ -31,9 +31,9 @@ int main(void) {
 	m2->fill_with(12).print();
 
 	std::cout << "Матрица 2.2:\n";
-	m2->add(heapm).print();
+	m2->multiply(heapm).print();
+
 	delete m2;
 	delete &heapm;
-
 	return EXIT_SUCCESS;
 }

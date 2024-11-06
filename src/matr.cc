@@ -212,6 +212,13 @@ Matrix &Matrix::multiply(Matrix const &other) {
 		std::cerr << "Умножение не согласованных матриц!\n";
 		return *this;
 	}
+	//Локальная копия текущей матрицы
+	//Временная матрица, в которую будет сохранятся результат
+	Matrix Tmp{this->line_count_, other.row_count_};
 
+	//Подстановка временной матрицы на место текущей
+	std::swap(Tmp.ptr_, this->ptr_);
+	std::swap(Tmp.line_count_, this->line_count_);
+	std::swap(Tmp.row_count_, this->row_count_);
 	return *this;
 }
