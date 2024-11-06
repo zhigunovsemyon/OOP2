@@ -54,8 +54,7 @@ Matrix::Matrix(Matrix const &other) {
 	/*Копирование содержимого другой матрицы в данную*/
 	for (long i = 0; i < other.line_count_; ++i) {
 		std::memcpy(this->ptr_[i], other.ptr_[i],
-			    sizeof(ptr_[i][0]) *
-				    (std::size_t)other.row_count_);
+			    sizeof(ptr_[i][0]) * (std::size_t)other.row_count_);
 	}
 }
 
@@ -163,6 +162,55 @@ Matrix &Matrix::fill(long line, long column) {
 			std::cout << '[' << i << "][" << j << "] = ";
 			std::cin >> this->ptr_[i][j];
 		}
+	}
+
+	return *this;
+}
+
+/*Добавление к данной матрице другой матрицы other.
+ * !Матрицы должны быть одинаковых размеров!*/
+Matrix &Matrix::add(Matrix const &other) {
+	// Если размеры не совпадают, аварийное завершение функции
+	if (other.row_count_ != this->row_count_ ||
+	    other.line_count_ != this->line_count_) {
+		std::cerr << "Сложение матриц разных размерностей!\n";
+		return *this;
+	}
+
+	// Добавление элементов другой матрицы к данной
+	for (long i = 0; i < this->line_count_; i++) {
+		for (long j = 0; j < this->row_count_; j++)
+			this->ptr_[i][j] += other.ptr_[i][j];
+	}
+	return *this;
+}
+
+/*Вычитание из данной матрицы другой матрицы other.
+ * !Матрицы должны быть одинаковых размеров!*/
+Matrix &Matrix::substract(Matrix const &other) {
+	// Если размеры не совпадают, аварийное завершение функции
+	if (other.row_count_ != this->row_count_ ||
+	    other.line_count_ != this->line_count_) {
+		std::cerr << "Вычитание матриц разных размерностей!\n";
+		return *this;
+	}
+
+	// Вычитание элементов другой матрицы из данной матрицы.
+	for (long i = 0; i < this->line_count_; i++) {
+		for (long j = 0; j < this->row_count_; j++)
+			this->ptr_[i][j] -= other.ptr_[i][j];
+	}
+
+	return *this;
+}
+
+/*Уиножение данной матрицы на другую матрицу other.
+ * !Матрицы должны быть одинаковых размеров!*/
+Matrix &Matrix::multiply(Matrix const &other) {
+	// Если размеры не совпадают, аварийное завершение функции
+	if (this->row_count_ != other.line_count_) {
+		std::cerr << "Умножение не согласованных матриц!\n";
+		return *this;
 	}
 
 	return *this;

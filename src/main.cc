@@ -23,17 +23,17 @@ int main(void) {
 	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
 		  << " на " << heapm.get_row_count() << '\n';
 
-	heapm.fill();
-
 	std::cout << "Матрица:\n";
-	heapm.print();
+	heapm.randomise(-10, 10).print();
 
-	Matrix *m2 = new Matrix(heapm);
-	delete &heapm;
+	Matrix *m2 = new Matrix(n, m);
+	std::cout << "Матрица 2.1:\n";
+	m2->fill_with(12).print();
 
-	std::cout << "Матрица 2:\n";
-	m2->print();
+	std::cout << "Матрица 2.2:\n";
+	m2->add(heapm).print();
 	delete m2;
+	delete &heapm;
 
 	return EXIT_SUCCESS;
 }
