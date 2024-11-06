@@ -21,7 +21,7 @@ int main(void) {
 	std::cin >> n;
 	Matrix &heapm = *new Matrix(m, n);
 	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
-		  << " на " << heapm.get_column_count() << '\n';
+		  << " на " << heapm.get_row_count() << '\n';
 
 	heapm.fill();
 
