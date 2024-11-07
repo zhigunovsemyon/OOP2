@@ -237,7 +237,7 @@ Matrix &Matrix::multiply(Matrix const &other) {
 	return *this;
 }
 
-bool Matrix::isEqualTo(Matrix const &other) {
+bool Matrix::isEqualTo(Matrix const &other) const {
 	// Если размеры не совпадают, значит они не совпадают априори
 	if (other.row_count_ != this->row_count_ ||
 	    other.line_count_ != this->line_count_) {

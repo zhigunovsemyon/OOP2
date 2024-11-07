@@ -30,7 +30,7 @@ int main(void) {
 	std::cout << "Матрица 2.1:\n";
 	m2->print();
 
-	if (heapm.randomise(0, 1488).isEqualTo(*m2))
+	if (heapm.isEqualTo(m2->randomise(0, 100)))
 		std::cout << "Матрицы равны\n";
 	else
 		std::cout << "Матрицы не равны\n";

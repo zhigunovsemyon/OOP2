@@ -71,5 +71,5 @@ public:
 	Matrix &multiply(Matrix const &other);
 
 	// Сравнение двух матриц на равенство/неравенство
-	bool isEqualTo(Matrix const &other);
+	bool isEqualTo(Matrix const &other) const;
 };
