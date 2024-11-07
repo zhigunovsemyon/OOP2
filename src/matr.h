@@ -3,7 +3,7 @@
 class Matrix {
 private:
 	/*Сокрытые поля*/
-	int **ptr_; // Указатель на непосредственно матрицу
+	int ** ptr_; // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
@@ -12,7 +12,7 @@ private:
 			  long const rows); // Общий конструктор
 
 	// Подсчёт ячейки при умножении матриц
-	void calcCellForMult_(Matrix const &first, Matrix const &second,
+	void calcCellForMult_(Matrix const & first, Matrix const & second,
 			      int const line, int const row);
 
 public:
@@ -23,13 +23,13 @@ public:
 	Matrix(long const lines, long const rows);
 
 	// Конструктор копирования
-	Matrix(Matrix const &other);
+	Matrix(Matrix const & other);
 
 	// Деструктор
 	~Matrix();
 
 	// Заполнение матрицы из стандартного ввода
-	Matrix &fill(long line = 0, long column = 0);
+	Matrix & fill(long line = 0, long column = 0);
 
 	// Получение числа строк матрицы
 	inline long get_line_count() const { return this->line_count_; }
@@ -41,13 +41,13 @@ public:
 	void print() const;
 
 	/*Метод для заполнения матрицы случайными числами*/
-	Matrix &randomise(int max, int min);
+	Matrix & randomise(int max, int min);
 
 	/*Метод зануления матрицы*/
-	inline Matrix &zero() { return this->fill_with(0); }
+	inline Matrix & zero() { return this->fill_with(0); }
 
 	/*Метод заполнения матрицы одним числом*/
-	Matrix &fill_with(int);
+	Matrix & fill_with(int);
 
 	/*Изменение элемента строки line, колонки column матрицы
 	 * Поддерживается индексация с конца через индексы <0.
@@ -56,20 +56,20 @@ public:
 
 	/*Чтение элемента строки line, колонки column матрицы
 	 * Поддерживается индексация с конца через индексы <0*/
-	int &get_element(long line, long column) const;
+	int & get_element(long line, long column) const;
 
 	/*Добавление к данной матрице другой матрицы other.
 	 * !Матрицы должны быть одинаковых размеров!*/
-	Matrix &add(Matrix const &other);
+	Matrix & add(Matrix const & other);
 
 	/*Вычитание из данной матрицы другой матрицы other.
 	 * !Матрицы должны быть одинаковых размеров!*/
-	Matrix &substract(Matrix const &other);
+	Matrix & substract(Matrix const & other);
 
 	/*Уиножение данной матрицы на другую матрицу other.
 	 * !Матрицы должны быть одинаковых размеров!*/
-	Matrix &multiply(Matrix const &other);
+	Matrix & multiply(Matrix const & other);
 
 	// Сравнение двух матриц на равенство/неравенство
-	bool isEqualTo(Matrix const &other) const;
+	bool isEqualTo(Matrix const & other) const;
 };

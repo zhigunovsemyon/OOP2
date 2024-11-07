@@ -4,7 +4,7 @@
 #include <utility>  /*swap() */
 
 // Вывод трассировки
-std::ostream &trace = std::cout;
+std::ostream & trace = std::cout;
 
 void Matrix::constructor_(long const lines, long const rows) {
 	::trace << "Адрес созданного объекта: " << this << '\n';
@@ -47,7 +47,7 @@ Matrix::Matrix(long const lines, long const columns) {
 	this->zero();
 }
 
-Matrix::Matrix(Matrix const &other) {
+Matrix::Matrix(Matrix const & other) {
 	// Создание новой матрицы с идентичной размерностью
 	this->constructor_(other.line_count_, other.row_count_);
 
@@ -87,7 +87,7 @@ void Matrix::print() const {
 }
 
 /*Метод для заполнения матрицы случайными числами*/
-Matrix &Matrix::randomise(int max, int min) {
+Matrix & Matrix::randomise(int max, int min) {
 	/*Переворот значений min и max*/
 	if (min > max)
 		std::swap(max, min);
@@ -101,7 +101,7 @@ Matrix &Matrix::randomise(int max, int min) {
 }
 
 /*Метод зануления матрицы*/
-Matrix &Matrix::fill_with(int const num) {
+Matrix & Matrix::fill_with(int const num) {
 	for (long i = 0; i < this->line_count_; i++) {
 		for (long j = 0; j < this->row_count_; j++)
 			ptr_[i][j] = num;
@@ -111,7 +111,7 @@ Matrix &Matrix::fill_with(int const num) {
 }
 
 /*Доступ к определённой строке line матрицы*/
-int &Matrix::get_element(long line, long column) const {
+int & Matrix::get_element(long line, long column) const {
 	/*Если пользователь запросил отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
@@ -145,7 +145,7 @@ bool Matrix::set_element(long line, long column, int num) {
 	return true;
 }
 
-Matrix &Matrix::fill(long line, long column) {
+Matrix & Matrix::fill(long line, long column) {
 	/*Если пользователь указал отрицательный элемент, отсчитывается
 	 *соответствующий элемент с конца*/
 	if (column < 0)
@@ -169,7 +169,7 @@ Matrix &Matrix::fill(long line, long column) {
 
 /*Добавление к данной матрице другой матрицы other.
  * !Матрицы должны быть одинаковых размеров!*/
-Matrix &Matrix::add(Matrix const &other) {
+Matrix & Matrix::add(Matrix const & other) {
 	// Если размеры не совпадают, аварийное завершение функции
 	if (other.row_count_ != this->row_count_ ||
 	    other.line_count_ != this->line_count_) {
@@ -187,7 +187,7 @@ Matrix &Matrix::add(Matrix const &other) {
 
 /*Вычитание из данной матрицы другой матрицы other.
  * !Матрицы должны быть одинаковых размеров!*/
-Matrix &Matrix::substract(Matrix const &other) {
+Matrix & Matrix::substract(Matrix const & other) {
 	// Если размеры не совпадают, аварийное завершение функции
 	if (other.row_count_ != this->row_count_ ||
 	    other.line_count_ != this->line_count_) {
@@ -204,9 +204,9 @@ Matrix &Matrix::substract(Matrix const &other) {
 	return *this;
 }
 
-void Matrix::calcCellForMult_(Matrix const &first, Matrix const &second,
+void Matrix::calcCellForMult_(Matrix const & first, Matrix const & second,
 			      int const line, int const row) {
-	int &cell = this->ptr_[line][row];
+	int & cell = this->ptr_[line][row];
 
 	for (int i{0}; i < first.row_count_; ++i)
 		cell += first.ptr_[line][i] * second.ptr_[i][row];
@@ -214,7 +214,7 @@ void Matrix::calcCellForMult_(Matrix const &first, Matrix const &second,
 
 /*Уиножение данной матрицы на другую матрицу other.
  * !Матрицы должны быть одинаковых размеров!*/
-Matrix &Matrix::multiply(Matrix const &other) {
+Matrix & Matrix::multiply(Matrix const & other) {
 	// Если размеры не совпадают, аварийное завершение функции
 	if (this->row_count_ != other.line_count_) {
 		std::cerr << "Умножение не согласованных матриц!\n";
@@ -237,7 +237,7 @@ Matrix &Matrix::multiply(Matrix const &other) {
 	return *this;
 }
 
-bool Matrix::isEqualTo(Matrix const &other) const {
+bool Matrix::isEqualTo(Matrix const & other) const {
 	// Если размеры не совпадают, значит они не совпадают априори
 	if (other.row_count_ != this->row_count_ ||
 	    other.line_count_ != this->line_count_) {

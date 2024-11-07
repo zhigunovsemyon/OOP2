@@ -19,14 +19,14 @@ int main(void) {
 	std::cin >> m;
 	std::cout << "Число столбцов: ";
 	std::cin >> n;
-	Matrix &heapm = *new Matrix(m, n);
+	Matrix & heapm = *new Matrix(m, n);
 	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
 		  << " на " << heapm.get_row_count() << '\n';
 
 	std::cout << "Матрица:\n";
 	heapm.randomise(-10, 10).print();
 
-	Matrix *m2 = new Matrix(heapm);
+	Matrix * m2 = new Matrix(heapm);
 	std::cout << "Матрица 2.1:\n";
 	m2->print();
 
