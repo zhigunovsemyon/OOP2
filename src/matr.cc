@@ -255,18 +255,25 @@ bool Matrix::isEqualTo(Matrix const & other) const {
 }
 
 Matrix & Matrix::transposeNonSq_() {
-	// for(int i{1}; i < this->row_count_; ++i){
-	// 	for(int j{0}; j < i; ++j)
-	// 		std::swap(this->ptr_[j][i],this->ptr_[i][j]);
-	// }
-	std::cerr << "Нет его\n";
+	// Создание пустой матрицы транспонированного размера
+	Matrix Tmp{this->line_count_, this->row_count_};
+
+	// Перенос значений из старой матрицы в новую
+	for (int i{0}; i < this->line_count_; ++i) {
+		for (int j{0}; j < this->row_count_; ++j)
+			Tmp.ptr_[j][i] = this->ptr_[i][j];
+	}
+
+	// Перестановка значений для деструкторов
+	std::swap(Tmp.ptr_, this->ptr_);
+	std::swap(line_count_, row_count_);
 	return *this;
 }
 
 Matrix & Matrix::transposeSq_() {
-	for(int i{1}; i < this->row_count_; ++i){
-		for(int j{0}; j < i; ++j)
-			std::swap(this->ptr_[j][i],this->ptr_[i][j]);
+	for (int i{1}; i < this->row_count_; ++i) {
+		for (int j{0}; j < i; ++j)
+			std::swap(this->ptr_[j][i], this->ptr_[i][j]);
 	}
 	return *this;
 }
