@@ -13,7 +13,7 @@ private:
 
 	// Подсчёт ячейки при умножении матриц
 	void calcCellForMult_(Matrix const &first, Matrix const &second,
-			     int const line, int const row);
+			      int const line, int const row);
 
 public:
 	// Конструктор квадратной матрицы, либо пустой
@@ -69,4 +69,7 @@ public:
 	/*Уиножение данной матрицы на другую матрицу other.
 	 * !Матрицы должны быть одинаковых размеров!*/
 	Matrix &multiply(Matrix const &other);
+
+	// Сравнение двух матриц на равенство/неравенство
+	bool isEqualTo(Matrix const &other);
 };

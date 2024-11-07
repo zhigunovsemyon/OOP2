@@ -205,10 +205,10 @@ Matrix &Matrix::substract(Matrix const &other) {
 }
 
 void Matrix::calcCellForMult_(Matrix const &first, Matrix const &second,
-			    int const line, int const row) {
+			      int const line, int const row) {
 	int &cell = this->ptr_[line][row];
 
-	for (int i {0}; i < first.row_count_; ++i)
+	for (int i{0}; i < first.row_count_; ++i)
 		cell += first.ptr_[line][i] * second.ptr_[i][row];
 }
 
@@ -224,8 +224,9 @@ Matrix &Matrix::multiply(Matrix const &other) {
 	// Временная матрица, в которую будет сохранятся результат
 	Matrix Tmp{this->line_count_, other.row_count_};
 
-	for(int i {0}; i < Tmp.row_count_; ++i){
-		for (int j {0}; j < Tmp.line_count_; ++j)
+	// Подсчёт каждой ячейки
+	for (int i{0}; i < Tmp.row_count_; ++i) {
+		for (int j{0}; j < Tmp.line_count_; ++j)
 			Tmp.calcCellForMult_(*this, other, i, j);
 	}
 
@@ -234,4 +235,21 @@ Matrix &Matrix::multiply(Matrix const &other) {
 	std::swap(Tmp.line_count_, this->line_count_);
 	std::swap(Tmp.row_count_, this->row_count_);
 	return *this;
+}
+
+bool Matrix::isEqualTo(Matrix const &other) {
+	// Если размеры не совпадают, значит они не совпадают априори
+	if (other.row_count_ != this->row_count_ ||
+	    other.line_count_ != this->line_count_) {
+		return false;
+	}
+
+	// Перебор каждого элемента
+	for (int i{0}; i < other.line_count_; ++i) {
+		for (int j{0}; j < other.row_count_; ++j) {
+			if (this->ptr_[i][j] != other.ptr_[i][j])
+				return false;
+		}
+	}
+	return true; // Матрицы равны
 }
