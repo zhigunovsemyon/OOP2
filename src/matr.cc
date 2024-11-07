@@ -253,3 +253,20 @@ bool Matrix::isEqualTo(Matrix const & other) const {
 	}
 	return true; // Матрицы равны
 }
+
+Matrix & Matrix::transposeNonSq_() {
+	// for(int i{1}; i < this->row_count_; ++i){
+	// 	for(int j{0}; j < i; ++j)
+	// 		std::swap(this->ptr_[j][i],this->ptr_[i][j]);
+	// }
+	std::cerr << "Нет его\n";
+	return *this;
+}
+
+Matrix & Matrix::transposeSq_() {
+	for(int i{1}; i < this->row_count_; ++i){
+		for(int j{0}; j < i; ++j)
+			std::swap(this->ptr_[j][i],this->ptr_[i][j]);
+	}
+	return *this;
+}

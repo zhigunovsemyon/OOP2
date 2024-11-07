@@ -23,19 +23,12 @@ int main(void) {
 	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
 		  << " на " << heapm.get_row_count() << '\n';
 
-	std::cout << "Матрица:\n";
-	heapm.randomise(-10, 10).print();
+	std::cout << "Матрица до:\n";
+	heapm.randomise(0, 9).print();
 
-	Matrix * m2 = new Matrix(heapm);
-	std::cout << "Матрица 2.1:\n";
-	m2->print();
+	std::cout << "Матрица после:\n";
+	heapm.transpose().print();
 
-	if (heapm.isEqualTo(m2->randomise(0, 100)))
-		std::cout << "Матрицы равны\n";
-	else
-		std::cout << "Матрицы не равны\n";
-
-	delete m2;
 	delete &heapm;
 	return EXIT_SUCCESS;
 }

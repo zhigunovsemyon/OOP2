@@ -3,11 +3,14 @@
 class Matrix {
 private:
 	/*Сокрытые поля*/
-	int ** ptr_; // Указатель на непосредственно матрицу
+	int ** ptr_;	  // Указатель на непосредственно матрицу
 	long row_count_;  // Число столбцов
 	long line_count_; // Число строк
 
 	/*Сокрытые методы*/
+	Matrix & transposeSq_();    // Транспонирование квадратной матрицы
+	Matrix & transposeNonSq_(); // Транспонирование не квадрат матрицы
+
 	void constructor_(long const lines,
 			  long const rows); // Общий конструктор
 
@@ -72,4 +75,11 @@ public:
 
 	// Сравнение двух матриц на равенство/неравенство
 	bool isEqualTo(Matrix const & other) const;
+
+	// Транспонирование матрицы
+	inline Matrix & transpose() {
+		return (this->row_count_ == this->line_count_)
+			       ? transposeSq_()
+			       : transposeNonSq_();
+	};
 };
