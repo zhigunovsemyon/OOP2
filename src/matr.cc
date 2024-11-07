@@ -204,6 +204,14 @@ Matrix &Matrix::substract(Matrix const &other) {
 	return *this;
 }
 
+void Matrix::calcCellForMult_(Matrix const &first, Matrix const &second,
+			    int const line, int const row) {
+	int &cell = this->ptr_[line][row];
+
+	for (int i {0}; i < first.row_count_; ++i)
+		cell += first.ptr_[line][i] * second.ptr_[i][row];
+}
+
 /*Уиножение данной матрицы на другую матрицу other.
  * !Матрицы должны быть одинаковых размеров!*/
 Matrix &Matrix::multiply(Matrix const &other) {
@@ -212,11 +220,16 @@ Matrix &Matrix::multiply(Matrix const &other) {
 		std::cerr << "Умножение не согласованных матриц!\n";
 		return *this;
 	}
-	//Локальная копия текущей матрицы
-	//Временная матрица, в которую будет сохранятся результат
+	// Локальная копия текущей матрицы
+	// Временная матрица, в которую будет сохранятся результат
 	Matrix Tmp{this->line_count_, other.row_count_};
 
-	//Подстановка временной матрицы на место текущей
+	for(int i {0}; i < Tmp.row_count_; ++i){
+		for (int j {0}; j < Tmp.line_count_; ++j)
+			Tmp.calcCellForMult_(*this, other, i, j);
+	}
+
+	// Подстановка временной матрицы на место текущей
 	std::swap(Tmp.ptr_, this->ptr_);
 	std::swap(Tmp.line_count_, this->line_count_);
 	std::swap(Tmp.row_count_, this->row_count_);
