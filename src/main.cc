@@ -14,19 +14,9 @@ int main(void) {
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
 
 	// Создание прямоугольной матрицы
-	int m, n;
-	std::cout << "Число строк: ";
-	std::cin >> m;
-	std::cout << "Число столбцов: ";
-	std::cin >> n;
-	Matrix & heapm = *new Matrix(m, n);
-	std::cout << "Конечные размеры матрицы: " << heapm.get_line_count()
-		  << " на " << heapm.get_row_count() << '\n';
-
-	std::cout << "Матрица до:\n";
+	Matrix & heapm = *new Matrix(1, 2);
 	heapm.randomise(0, 9).print();
 
-	std::cout << "Матрица после:\n";
 	heapm.transpose().print();
 
 	delete &heapm;
